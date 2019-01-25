@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/event.dart';
-import 'package:flutter_app/pages/settingPage.dart';
+import 'pages/event.dart';
+import 'pages/settingPage.dart';
 import 'dart:io';
 import 'package:flutter/services.dart';
 
@@ -44,7 +44,7 @@ class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
           type: BottomNavigationBarType.fixed,
           items: [
             BottomNavigationBarItem(
-                icon: new Icon(Icons.category), title: new Text('待办')),
+                icon: new Icon(Icons.category), title: new Text('实时路况')),
             BottomNavigationBarItem(
                 icon: new Icon(Icons.account_circle), title: new Text('我')),
           ],

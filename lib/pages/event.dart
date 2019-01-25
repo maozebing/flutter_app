@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter_app/pages/user.dart';
+import '../model/event.dart';
 import 'eventDetail.dart';
 
 class EventListPage extends StatelessWidget {
@@ -8,7 +8,7 @@ class EventListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('事件'),
+        title: Text('实时路况'),
         //backgroundColor: Color.fromRGBO(237, 237, 237, 1),
       ),
       body: Container(child: ListPageBody()),
@@ -22,7 +22,7 @@ class ListPageBody extends StatefulWidget {
 }
 
 class ListPageBodyState extends State<ListPageBody> {
-  var _members = <User>[];
+  var _members = <Event>[];
   void _getDatas() async {
     Dio dio = new Dio();
     Response response = await dio
@@ -30,7 +30,7 @@ class ListPageBodyState extends State<ListPageBody> {
     setState(() {
       for (var memberJSON in response.data) {
         final member =
-            new User(memberJSON["roadName"], memberJSON["reportout"]);
+            new Event(memberJSON["roadName"], memberJSON["reportout"],"12:35");
         _members.add(member);
       }
 
@@ -63,14 +63,37 @@ class ListPageBodyState extends State<ListPageBody> {
     }));
   }
 
-  Widget buildListData(BuildContext context, User item) {
+  Widget buildListData(BuildContext context, Event item) {
     debugPrint(item.roadName);
     debugPrint(item.reportout);
     return ListTile(
       isThreeLine: false,
-      title: Text(item.roadName),
-      subtitle: Text(item.reportout,maxLines: 2,overflow: TextOverflow.ellipsis),
-      //trailing: Icon(Icons.keyboard_arrow_right),
+      title: Row(
+        children: <Widget>[
+          Expanded(
+            child: Container(
+              child: Text(
+                item.roadName,
+                style: TextStyle(fontSize: 18),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            flex: 5,
+          ),
+          Expanded(
+            child: Container(
+              child: Text(
+                item.time,
+                textAlign: TextAlign.right,
+              ),
+            ),
+            flex: 1,
+          ),
+        ],
+      ),
+      subtitle:
+          Text(item.reportout, maxLines: 2, overflow: TextOverflow.ellipsis),
+      //trailing: Text("23:00"),
       onTap: () {
         _showEventDetail(item);
       },
