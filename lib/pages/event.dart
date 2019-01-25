@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
-import 'dart:convert';
 import 'package:flutter_app/pages/user.dart';
 
 class EventListPage extends StatelessWidget {
