@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_app/pages/user.dart';
+import 'eventDetail.dart';
 
 class EventListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('突发事件'),
+        title: Text('事件'),
+        //backgroundColor: Color.fromRGBO(237, 237, 237, 1),
       ),
       body: Container(child: ListPageBody()),
     );
@@ -36,30 +38,41 @@ class ListPageBodyState extends State<ListPageBody> {
     });
   }
 
+  _showDialog(item) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return new AlertDialog(
+          title: Text(
+            'ListViewDemo',
+            style: TextStyle(
+              color: Colors.black54,
+              fontSize: 18.0,
+            ),
+          ),
+          content: Text('您选择的item内容为:${item.roadName}'),
+        );
+      },
+    );
+  }
+
+  _showEventDetail(item) {
+    //导航到新路由
+    Navigator.push(context, new MaterialPageRoute(builder: (context) {
+      return new EventDetail(item: item);
+    }));
+  }
+
   Widget buildListData(BuildContext context, User item) {
     debugPrint(item.roadName);
     debugPrint(item.reportout);
     return ListTile(
       isThreeLine: false,
       title: Text(item.roadName),
-      subtitle: Text(item.reportout),
-      trailing: Icon(Icons.keyboard_arrow_right),
+      subtitle: Text(item.reportout,maxLines: 2,overflow: TextOverflow.ellipsis),
+      //trailing: Icon(Icons.keyboard_arrow_right),
       onTap: () {
-        showDialog(
-          context: context,
-          builder: (BuildContext context) {
-            return new AlertDialog(
-              title: Text(
-                'ListViewDemo',
-                style: TextStyle(
-                  color: Colors.black54,
-                  fontSize: 18.0,
-                ),
-              ),
-              content: Text('您选择的item内容为:${item.roadName}'),
-            );
-          },
-        );
+        _showEventDetail(item);
       },
     );
   }
