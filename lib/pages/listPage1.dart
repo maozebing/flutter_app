@@ -8,7 +8,7 @@ class ListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('我的待办'),
+        title: Text('突发事件'),
       ),
       body: Container(child: ListPageBody()),
     );
