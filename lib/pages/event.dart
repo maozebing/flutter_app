@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 import 'dart:convert';
 import 'package:flutter_app/pages/user.dart';
 
-class ListPage extends StatelessWidget {
+class EventListPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

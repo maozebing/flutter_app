@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app/pages/listPage1.dart';
+import 'package:flutter_app/pages/event.dart';
 import 'package:flutter_app/pages/settingPage.dart';
 
 void main() {
@@ -25,7 +25,7 @@ class BottomNavigationWidgetState extends State<BottomNavigationWidget> {
   @override
   void initState() {
     pages
-      ..add(ListPage())
+      ..add(EventListPage())
       ..add(SettingPage());
       super.initState();
   }
